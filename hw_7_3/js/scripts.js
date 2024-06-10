@@ -7,7 +7,7 @@ function userDialog() {
             console.log(`Not valid value ${userNumber}`);
         } else if(userNumber < 100) {
             console.log(`Not valid number ${userNumber}. Enter a number greater than 100`);
-        } else if(userNumber > 100) {
+        } else {
             console.log(userNumber);
             break;
         }
