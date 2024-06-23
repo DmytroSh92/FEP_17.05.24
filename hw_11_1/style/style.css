@@ -1,0 +1,23 @@
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px auto;
+}
+
+td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 8px;
+}
+
+td:first-child{
+    background-color: #D2691E;
+}
+
+tr:first-child {
+    background-color: #D2691E;
+}
+
+h1 {
+    text-align: center;
+}
