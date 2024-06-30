@@ -1,0 +1,17 @@
+ul {
+    list-style-type: circle;
+    max-width: 180px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+li::before {
+    content: '●';
+    position: absolute;
+    left: 30px;
+    color: black;
+}
