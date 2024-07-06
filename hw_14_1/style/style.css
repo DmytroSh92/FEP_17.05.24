@@ -1,0 +1,103 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    width: 80%;
+}
+
+section {
+    background-color: #F9F9F9;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    color: #FF0000;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0000FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #000080;
+}
+
+p {
+    color: #BBB;
+    font-weight: bold;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.slider_content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.slider img {
+    width: 70%;
+    height: auto;
+}
+
+.slide_text {
+    width: 30%;
+    padding-left: 20px;
+}
+
+.slider_button {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 50px;
+}
+
+.slider_indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    background-color: gray;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator:hover {
+    background-color: darkgray;
+}
+
+.indicator.active {
+    background-color: blue;
+}
+
+.hidden {
+    display: none;
+}
