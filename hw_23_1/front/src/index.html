@@ -14,8 +14,15 @@
 <div class="container">
     <h1>ToDoList</h1>
     <form class="form js--form">
-        <input type="text" name="value" required class="form__input js--form__input" id="js--form-id">
-        <button class="form__btn">Додати</button>
+        <div class="mb-3">
+            <label for="task-title" class="form-label">Title:</label>
+            <input type="text" name="title" required class="form__input js--form__title" id="task-title">
+        </div>
+        <div class="mb-3">
+            <label for="task-description" class="form-label">Description:</label>
+            <input type="text" name="description" required class="form__input js--form__description" id="task-description">
+        </div>
+        <button class="form__btn">Add Task</button>
     </form>
     <ul class="js--todos-wrapper">
     </ul>
@@ -28,16 +35,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="task-form">
                     <div class="mb-3">
-                        <p class="task_title">Task:</p>
-                        <p id="task-name"></p>
-                        <p class="task_title">Done:</p>
-                        <p id="task-status"></p>
+                        <label for="form-task-title" class="form-label">Title:</label>
+                        <input type="text" id="form-task-title" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-task-description" class="form-label">Description:</label>
+                        <textarea id="form-task-description" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-task-done" class="form-label">Done:</label>
+                        <input type="checkbox" id="form-task-done">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-task">Save</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
