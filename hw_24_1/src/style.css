@@ -1,0 +1,14 @@
+.card-title {
+    color: #2a9d8f;
+}
+
+.card-text {
+    color: #264653;
+}
+
+.custom-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #e76f51;
+    text-align: center;
+}
