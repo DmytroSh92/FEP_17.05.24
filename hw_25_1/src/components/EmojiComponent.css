@@ -1,0 +1,16 @@
+.img-button {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.app-img {
+    height: 20vmin;
+    pointer-events: none;
+}
+
+.img-count {
+    font-size: 1.7rem;
+}
