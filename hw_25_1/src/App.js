@@ -2,11 +2,11 @@ import './App.css';
 import React, {useEffect, useState} from "react";
 import {DataEmojis} from "./data/Emojis";
 import EmojiComponent from "./components/EmojiComponent";
+import ResultsComponent from "./components/ResultsComponent";
 
 function App() {
     const [isVisible, setIsVisible] = useState(false)
     const [emojis, setEmojis] = useState([]);
-    const [winners, setWinner] = useState([]);
 
     useEffect(() => {
         const storedData = localStorage.getItem('emojiData');
@@ -19,15 +19,18 @@ function App() {
 
 
     const handleResult = () => {
-        setEmojis(JSON.parse(localStorage.getItem('emojiData')));
         setIsVisible(!isVisible);
-        setWinner(getWinner);
     };
 
-    const getWinner = () => {
-        const emj = JSON.parse(localStorage.getItem('emojiData'));
-        const maxCount = emj.reduce((max, emoji) => emoji.count > max ? emoji.count : max, 0);
-        return emj.filter(emoji => emoji.count === maxCount);
+    const incrementCount = (id) => {
+        const updatedEmojis = emojis.map(emoji => {
+            if (emoji.id === id) {
+                emoji.count += 1;
+            }
+            return emoji;
+        });
+        setEmojis(updatedEmojis);
+        localStorage.setItem('emojiData', JSON.stringify(updatedEmojis));
     };
 
     const resetCounters = () => {
@@ -41,25 +44,12 @@ function App() {
             <h1>Голосування за найкращий смайлик</h1>
             <div className="App">
                 {emojis.map((emoji, index) => (
-                    <EmojiComponent key={index} id={emoji.id} src={emoji.src} count={emoji.count}/>
+                    <EmojiComponent key={index} id={emoji.id} src={emoji.src} count={emoji.count} increment={incrementCount}/>
                 ))}
             </div>
             <div>
                 <button onClick={handleResult} className={"result-button"}>Show Results</button>
-                {isVisible && winners &&
-                    <div className={"container"}>
-                        <h2>Результати голосування:</h2>
-                        <div className={"App result-block"}>
-                            {winners.map((winner, index) => (
-                                <div key={index}>
-                                    <h3>Переможець:</h3>
-                                    <img src={winner.src} alt={"emoji"} className={"app-img"}/>
-                                    <p className={"img-count"}>Кількість голосів: {winner.count}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                }
+                {isVisible && <ResultsComponent emojis={emojis} />}
                 <div>
                     <button onClick={resetCounters} className={"result-button reset-button"}>Reset Results</button>
                 </div>
