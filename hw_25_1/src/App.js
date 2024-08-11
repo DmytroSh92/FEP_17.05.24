@@ -1,11 +1,11 @@
 import './App.css';
-import React, {useEffect, useState} from "react";
-import {DataEmojis} from "./data/Emojis";
+import React, { useEffect, useState } from "react";
+import { DataEmojis } from "./data/Emojis";
 import EmojiComponent from "./components/EmojiComponent";
 import ResultsComponent from "./components/ResultsComponent";
 
 function App() {
-    const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false);
     const [emojis, setEmojis] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,6 @@ function App() {
 
         setEmojis(JSON.parse(localStorage.getItem('emojiData')));
     }, []);
-
 
     const handleResult = () => {
         setIsVisible(!isVisible);
@@ -34,8 +33,9 @@ function App() {
     };
 
     const resetCounters = () => {
-        setEmojis(DataEmojis);
-        localStorage.setItem('emojiData', JSON.stringify(DataEmojis));
+        const resetEmojis = DataEmojis.map(emoji => ({ ...emoji, count: 0 }));
+        setEmojis(resetEmojis);
+        localStorage.setItem('emojiData', JSON.stringify(resetEmojis));
         setIsVisible(false);
     };
 
@@ -43,8 +43,8 @@ function App() {
         <div className={"container"}>
             <h1>Голосування за найкращий смайлик</h1>
             <div className="App">
-                {emojis.map((emoji, index) => (
-                    <EmojiComponent key={index} id={emoji.id} src={emoji.src} count={emoji.count} increment={incrementCount}/>
+                {emojis.map((emoji) => (
+                    <EmojiComponent key={emoji.id} id={emoji.id} src={emoji.src} count={emoji.count} increment={incrementCount} />
                 ))}
             </div>
             <div>
