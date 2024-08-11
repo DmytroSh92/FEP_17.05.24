@@ -1,61 +1,72 @@
 import './App.css';
-import React, { useEffect, useState } from "react";
+import React, {Component} from "react";
 import { DataEmojis } from "./data/Emojis";
 import EmojiComponent from "./components/EmojiComponent";
 import ResultsComponent from "./components/ResultsComponent";
 
-function App() {
-    const [isVisible, setIsVisible] = useState(false);
-    const [emojis, setEmojis] = useState([]);
+class App extends Component {
 
-    useEffect(() => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isVisible: false,
+            emojis: [],
+        };
+    }
+
+    componentDidMount() {
         const storedData = localStorage.getItem('emojiData');
         if (!storedData) {
             localStorage.setItem('emojiData', JSON.stringify(DataEmojis));
         }
 
-        setEmojis(JSON.parse(localStorage.getItem('emojiData')));
-    }, []);
+        this.setState({
+            emojis: JSON.parse(localStorage.getItem('emojiData')),
+        });
+    }
 
-    const handleResult = () => {
-        setIsVisible(!isVisible);
+    handleResult = () => {
+        this.setState((prevState) => ({
+            isVisible: !prevState.isVisible,
+        }));
     };
 
-    const incrementCount = (id) => {
-        const updatedEmojis = emojis.map(emoji => {
+    incrementCount = (id) => {
+        const updatedEmojis = this.state.emojis.map(emoji => {
             if (emoji.id === id) {
                 emoji.count += 1;
             }
             return emoji;
         });
-        setEmojis(updatedEmojis);
+        this.setState({emojis: updatedEmojis});
         localStorage.setItem('emojiData', JSON.stringify(updatedEmojis));
     };
 
-    const resetCounters = () => {
-        const resetEmojis = DataEmojis.map(emoji => ({ ...emoji, count: 0 }));
-        setEmojis(resetEmojis);
+    resetCounters = () => {
+        const resetEmojis = DataEmojis.map(emoji => ({...emoji, count: 0}));
         localStorage.setItem('emojiData', JSON.stringify(resetEmojis));
-        setIsVisible(false);
+        this.setState({emojis: resetEmojis, isVisible: false});
     };
 
-    return (
-        <div className={"container"}>
-            <h1>Голосування за найкращий смайлик</h1>
-            <div className="App">
-                {emojis.map((emoji) => (
-                    <EmojiComponent key={emoji.id} id={emoji.id} src={emoji.src} count={emoji.count} increment={incrementCount} />
-                ))}
-            </div>
-            <div>
-                <button onClick={handleResult} className={"result-button"}>Show Results</button>
-                {isVisible && <ResultsComponent emojis={emojis} />}
+    render() {
+        return (
+            <div className={"container"}>
+                <h1>Голосування за найкращий смайлик</h1>
+                <div className="App">
+                    {this.state.emojis.map((emoji) => (
+                        <EmojiComponent key={emoji.id} id={emoji.id} src={emoji.src} count={emoji.count}
+                                        increment={this.incrementCount}/>
+                    ))}
+                </div>
                 <div>
-                    <button onClick={resetCounters} className={"result-button reset-button"}>Reset Results</button>
+                    <button onClick={this.handleResult} className={"result-button"}>Show Results</button>
+                    {this.state.isVisible && <ResultsComponent emojis={this.state.emojis}/>}
+                    <div>
+                        <button onClick={this.resetCounters} className={"result-button reset-button"}>Reset Results</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
-
 export default App;
