@@ -153,7 +153,7 @@ const Main = () => {
 
                             <Grid item xs={2}>
                                 <Button type="submit" variant="contained" color="primary" disabled={submitting || pristine || invalid}>
-                                    Send
+                                    Submit
                                 </Button>
                             </Grid>
                         </Grid>
